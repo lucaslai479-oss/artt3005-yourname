@@ -1,0 +1,9 @@
+artt3005-yourname/
+│
+├── README.md
+│
+└── decaying-record/
+    ├── record.html          ← the AI writes this. You do not type it.
+    ├── record.json         ← you edit this. It is your record.
+    └── assets/
+        └── record.jpg      ← your image goes here

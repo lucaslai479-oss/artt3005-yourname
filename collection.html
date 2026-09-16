@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Stitches Fade: The Retreat of the Shanghai Sewing Machine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #e8e2d6;
+      --ink: #1a1714;
+      --mute: #6b6358;
+      --rule: #b8ad9a;
+      --card: #f4efe6;
+      --back: #efe8db;
+      --media: #d8d0c2;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 12% 0%, #f2ebe0 0%, transparent 45%),
+        radial-gradient(ellipse at 88% 100%, #ddd4c4 0%, transparent 40%),
+        var(--paper);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+
+    .fail {
+      font-family: "IBM Plex Mono", monospace;
+      max-width: 36rem;
+      margin: 20vh auto;
+      padding: 1.5rem;
+      line-height: 1.6;
+    }
+
+    header {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--rule);
+      animation: rise 0.7s ease-out both;
+    }
+
+    .kicker {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mute);
+      margin: 0 0 0.75rem;
+    }
+
+    h1 {
+      font-size: clamp(1.35rem, 2.8vw, 1.95rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      max-width: 28ch;
+    }
+
+    .lede {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--mute);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+
+    .meta {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      color: var(--mute);
+    }
+
+    #grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1.75rem 1.25rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      perspective: 1200px;
+      height: 480px;
+      animation: rise 0.65s ease-out both;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.04s; }
+    .card:nth-child(2) { animation-delay: 0.08s; }
+    .card:nth-child(3) { animation-delay: 0.12s; }
+    .card:nth-child(4) { animation-delay: 0.16s; }
+    .card:nth-child(5) { animation-delay: 0.2s; }
+    .card:nth-child(n+6) { animation-delay: 0.24s; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .inner { transform: rotateY(180deg); }
+
+    .front, .back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border: 1px solid #b9ad97;
+      background: var(--card);
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .back { transform: rotateY(180deg); background: var(--back); }
+
+    .type-tag {
+      position: absolute;
+      top: 0.55rem;
+      left: 0.55rem;
+      z-index: 2;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(26, 23, 20, 0.82);
+      color: #f4efe6;
+      padding: 0.22rem 0.4rem;
+    }
+
+    .media {
+      flex: 1;
+      min-height: 0;
+      background: var(--media);
+      border: 1px dashed #b9ad97;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media audio { width: 90%; }
+
+    .text-body {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      line-height: 1.5;
+      padding: 0.75rem;
+      overflow: auto;
+      height: 100%;
+      white-space: pre-wrap;
+      text-align: left;
+    }
+
+    .missing {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      color: var(--mute);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .front h2 {
+      margin: 0.7rem 0 0.15rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .front .place {
+      margin: 0 0 0.65rem;
+      font-size: 0.75rem;
+      color: var(--mute);
+    }
+
+    button.inspect {
+      margin-top: auto;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--card);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.55rem 0.7rem;
+      cursor: pointer;
+    }
+
+    button.inspect:hover { opacity: 0.88; }
+
+    .label {
+      height: 100%;
+      border: 1px solid var(--ink);
+      padding: 0.85rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      overflow: auto;
+    }
+
+    .cat {
+      letter-spacing: 0.14em;
+      font-size: 0.68rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.45rem;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .field { margin-bottom: 0.65rem; }
+
+    .field .k {
+      color: var(--mute);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .field .v {
+      line-height: 1.4;
+      transition: filter 15s linear, opacity 15s linear, letter-spacing 15s linear;
+    }
+
+    .card.flipped .field .v {
+      filter: blur(5px);
+      opacity: 0.08;
+      letter-spacing: 0.42em;
+    }
+
+    .card.flipped .field.late .v {
+      transition: filter 15s linear 11s, opacity 15s linear 11s, letter-spacing 15s linear 11s;
+    }
+
+    button.return {
+      margin-top: auto;
+      border: 1px solid var(--ink);
+      background: transparent;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.45rem;
+      cursor: pointer;
+    }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.25rem 2.5rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      color: var(--mute);
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    const app = document.getElementById("app");
+    const HEADING = "The Stitches Fade: The Retreat of the Shanghai Sewing Machine";
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function fail() {
+      app.innerHTML = `<p class="fail">records.json did not load. Serve this folder first, then open http://localhost:8000/collection.html<br><br>In Cursor terminal:<br>python -m http.server 8000</p>`;
+    }
+
+    function mediaBlock(rec) {
+      const src = escapeHtml(rec.src);
+      const title = escapeHtml(rec.title);
+      if (rec.type === "image") {
+        return `<img src="${src}" alt="${title}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'missing',textContent:'Missing file: ${src}'}))" />`;
+      }
+      if (rec.type === "sound") {
+        return `<audio controls preload="metadata" src="${src}"></audio>`;
+      }
+      return `<div class="text-body" data-text-src="${src}">Loading text…</div>`;
+    }
+
+    function cardHTML(rec) {
+      return `
+        <article class="card" data-id="${escapeHtml(rec.catalog_id)}">
+          <div class="inner">
+            <div class="front">
+              <div class="media">
+                <span class="type-tag">${escapeHtml(rec.type)}</span>
+                ${mediaBlock(rec)}
+              </div>
+              <h2>${escapeHtml(rec.title)}</h2>
+              <p class="place">${escapeHtml(rec.place)} · ${escapeHtml(rec.date)}</p>
+              <button class="inspect" type="button">Inspect reverse</button>
+            </div>
+            <div class="back">
+              <div class="label">
+                <div class="cat">${escapeHtml(rec.catalog_id)}</div>
+                <div class="field"><div class="k">Title</div><div class="v">${escapeHtml(rec.title)}</div></div>
+                <div class="field"><div class="k">Date and place</div><div class="v">${escapeHtml(rec.date)} · ${escapeHtml(rec.place)}</div></div>
+                <div class="field"><div class="k">Recorded by</div><div class="v">${escapeHtml(rec.recorder)}</div></div>
+                <div class="field"><div class="k">Type / certainty</div><div class="v">${escapeHtml(rec.type)} · ${escapeHtml(rec.certainty)}</div></div>
+                <div class="field late"><div class="k">What was not captured</div><div class="v">${escapeHtml(rec.not_captured)}</div></div>
+                <button class="return" type="button">Return</button>
+              </div>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    fetch("records.json")
+      .then((r) => {
+        if (!r.ok) throw new Error("missing");
+        return r.json();
+      })
+      .then((data) => {
+        const records = Array.isArray(data) ? data : (data.records || []);
+        const counts = records.reduce((acc, rec) => {
+          acc[rec.type] = (acc[rec.type] || 0) + 1;
+          return acc;
+        }, {});
+
+        app.innerHTML = `
+          <header>
+            <p class="kicker">ARTT3005 · Digital Collection of Loss · 24238775 Chen Yanrui</p>
+            <h1>${HEADING}</h1>
+            <p class="lede">Twenty encounters with one Shanghai Brand household sewing machine as the habit of home sewing withdraws. The catalog number and the field labels survive. The contents of each reverse do not.</p>
+            <div class="meta">
+              <span>Records: ${records.length}</span>
+              <span>image ${counts.image || 0} · sound ${counts.sound || 0} · text ${counts.text || 0}</span>
+              <span>Recorder: Anson</span>
+            </div>
+          </header>
+          <section id="grid">${records.map(cardHTML).join("")}</section>
+          <footer>Open through a local server. File names in records.json must match media/ exactly.</footer>
+        `;
+
+        document.querySelectorAll("[data-text-src]").forEach(async (el) => {
+          try {
+            const res = await fetch(el.dataset.textSrc);
+            el.textContent = res.ok ? await res.text() : `Missing file: ${el.dataset.textSrc}`;
+          } catch (e) {
+            el.textContent = `Missing file: ${el.dataset.textSrc}`;
+          }
+        });
+
+        document.querySelectorAll(".card").forEach((card) => {
+          card.querySelector(".inspect").addEventListener("click", () => {
+            card.classList.add("flipped");
+          });
+          card.querySelector(".return").addEventListener("click", () => {
+            card.classList.remove("flipped");
+            card.querySelectorAll(".field .v").forEach((v) => {
+              v.style.transition = "none";
+              v.style.filter = "";
+              v.style.opacity = "";
+              v.style.letterSpacing = "";
+              void v.offsetWidth;
+              v.style.transition = "";
+            });
+          });
+        });
+      })
+      .catch(fail);
+  </script>
+</body>
+</html>
